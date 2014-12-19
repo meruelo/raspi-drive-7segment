@@ -15,7 +15,8 @@ _start:
 .section .text
 main:
 	/* Set digit to display */
-	mov r0, #22
+	mov r0, #17
+	mov r2, #0x800
 
 	/* Set all GPIOs to be used as outputs */
 	push {r0, r1, r2, lr}

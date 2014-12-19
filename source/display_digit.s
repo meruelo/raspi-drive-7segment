@@ -5,6 +5,7 @@
    			0: Leftmost
    			1: Rightmost
    r1 - Digit
+   r2 - On cycles
 ****************************************************************************/
 .global display_digit
 display_digit:
@@ -14,7 +15,6 @@ bxhi lr @ If bigger, exit
 
 /* Organize data ... */
 push {r4, r5, r6, r7, r8, r9, r10, lr}
-mov r2, r0
 mov r9, r1
 ldr r3, =digits
 
@@ -55,7 +55,7 @@ loop:						@ We are displaying the number in the inverse order
 	bl set_gpio_value
 	pop {r0, r1, r2, r3}
 
-	mov r0, #0x10000	@ Hold it LOW for ~5K cycles (<5ms)
+	mov r0, r2	@ Hold it LOW for ~5K cycles (<5ms)
 	push {r0, r1, r2, r3}
 	bl wait
 	pop {r0, r1, r2, r3}
