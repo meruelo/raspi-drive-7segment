@@ -3,11 +3,12 @@
  Inputs:
    r0 - Time to wait (in cycles)
 ****************************************************************************/
+.include "rpi_peripherals.h"
 .globl wait
 wait:
 	mov r3, r0 @ Copy time to wait to r3
 	push {r4, lr} @ 8-byte aligned (AAPCS)
-	bl get_sys_timer_base_address
+	load_constant r0, SYS_TIMER_BASE_ADDRESS
 
 	ldr r1, [r0, #4] @ Read CLO register
 	mov r2, r1 @ Put initial counter value into r2

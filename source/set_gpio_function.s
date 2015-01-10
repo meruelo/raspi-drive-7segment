@@ -4,6 +4,7 @@
    r0 - GPIO number
    r1 - GPIO mode (see BCM2835)   
 *****************************************************************************/
+.include "rpi_peripherals.h"
 .globl set_gpio_function
 set_gpio_function:
 	cmp r0, #53
@@ -22,10 +23,7 @@ set_gpio_function:
 	add r0, r0, lsl #1 			@ r0 = 3·r0
 	lsl r1, r0					@ r1 = r1 << r0 (as each GPIO has 3bits)
 
-	push {r0, r1, r2, r3}
-	bl get_gpio_base_address
-	mov r4, r0
-	pop {r0, r1, r2, r3}
+	load_constant r4, GPIO_BASE_ADDRESS
 
 	ldr r3, [r4, r2]			@ Get old value
 	mov r5, #7 					@ Set new value while preserving the others

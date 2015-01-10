@@ -1,6 +1,7 @@
 /******************************************************************************
 *	kernel.ld
 *	 by Alex Chadwick
+*    mod by Fernando
 *
 *	A linker script for generation of raspberry pi kernel images.
 ******************************************************************************/
