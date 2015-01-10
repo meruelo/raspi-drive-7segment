@@ -4,6 +4,7 @@ Inputs:
    r0 - GPIO number
    r1 - bit value            
 ****************************************************************************/
+.include "rpi_peripherals.h"
 .globl set_gpio_value
 set_gpio_value:
 	/* Check values */
@@ -18,10 +19,8 @@ set_gpio_value:
 
 	/* Get base address */
 	mov r4, r0
-	push {r6, lr} 		@ 8-byte aligned (AAPCS) 
-	bl get_gpio_base_address /* Better with LDR ?*/
-	pop {r6, lr}  		@ 8-byte aligned (AAPCS)
-
+	load_constant r0, GPIO_BASE_ADDRESS
+	
 	/* Set R0 = GPIO + FUNC s*/
 	add r0, r0, r3
 
